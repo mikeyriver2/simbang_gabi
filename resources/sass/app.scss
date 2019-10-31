@@ -19,11 +19,11 @@ body{
     align-items: center;
     height: 100%;
     &__absolute{
-        width: 469px;
-        height: 656px;
+        width: 362px; //384px; //469px;
+        height: 510px; //535px; //656px;
         background-size: cover;
         position: absolute;
-        margin-left: -459px;
+        margin-left: -381px; //-459px;
         box-shadow: 12px 7px 51px -22px rgba(0, 0, 0, 0.75);
     }
     &__form-container{
@@ -32,14 +32,33 @@ body{
             padding-right: 20px;
         }
         background: white;
-        width: 1090px;
-        height: 783px;
+        width: 915px; //1060px; //1090px;
+        height: 645px; //783px;
         box-shadow: -3px 6px 67px -14px rgba(255, 255, 255, 0.75);
         .text-inputs{
             &__dropdowns{
                 display: flex;
                 justify-content: space-between;
             }
+            p{
+                margin-top: 15px;
+                font-size: .85em;
+                color: #adadad;
+            }
+        }
+    }
+}
+
+.generic-modal{
+    &__confirm-message{
+        line-height: 25px;
+    }
+
+    &__confirm-buttons{
+        display: flex;
+        justify-content: flex-end;
+        p:nth-child(1){
+            margin-right: 20px;
         }
     }
 }
@@ -77,28 +96,28 @@ $s3:"";
     box-shadow: #{$s1};
     animation-duration: 10s;
 }
-.layer1.a {
-    animation-delay: -3s;
+.layer1 {
+    animation-delay: 0s;
 }
 .layer2 {
     width: 1.2rem;
     height: 1.2rem;
     filter:blur(3px);
     box-shadow: #{$s2};
-    animation-duration: 15s;
+    animation-duration: 10s;
 }
-.layer2.a {
-    animation-delay: -4s;
+.layer2 {
+    animation-delay: -5s;
 }
 .layer3 {
     width: 0.8rem;
     height: 0.8rem;
     filter:blur(6px);
     box-shadow: #{$s3};
-    animation-duration: 8s;
+    animation-duration: 10s;
 }
-.layer3.a {
-    animation-delay: -5s;
+.layer3 {
+    animation-delay: -10s;
 }
 @keyframes fall {
     100% {transform: translateY(200vh); }
