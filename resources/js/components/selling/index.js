@@ -81,6 +81,7 @@ class SellIndex extends Component{
     }
 
     render(){
+        let isMobile = window.innerWidth <= 768;
         const renderNumbers = () => {
             let numbers = [];
             for(let i = 0; i < 21; i++){
@@ -139,13 +140,13 @@ class SellIndex extends Component{
                 </Modal>
                 <div class="snow layer1" />
                 <div class="snow layer2" />
-                <div class="snow layer3" />
+                {/* <div class="snow layer3" /> */}
                 <div className="s-index">
-                    <div style={{backgroundImage:'url("/images/MainPoster.jpg")'}} className="s-index__absolute" />
+                    {!isMobile && <div style={{backgroundImage:'url("/images/MainPoster.jpg")'}} className="s-index__absolute" />}
                     <div className="s-index__form-container">
                         <Row style={{margin: "0px"}}>
-                            <Col md={4} />
-                            <Col md={8}>
+                            {!isMobile && <Col md={4} />}
+                            <Col md={isMobile ? 12 : 8}>
                                 <h1>RESERVATION FORM</h1>
                                 <div className="text-inputs">
                                     <TextField
@@ -186,7 +187,7 @@ class SellIndex extends Component{
                                             id="filled-select-currency"
                                             select
                                             value = {this.state.patrons}
-                                            label="Patron (P1000 each)"
+                                            label="Patron"
                                             onChange={(e)=>{this.setState({patrons: e.target.value})}}
                                             helperText="Number of Patron tickets"
                                             margin="normal"
@@ -199,7 +200,7 @@ class SellIndex extends Component{
                                             id="filled-select-currency"
                                             select
                                             value={this.state.adults}
-                                            label="Adult (P700 each)"
+                                            label="Adult"
                                             onChange={(e)=>{this.setState({adults: e.target.value})}}
                                             helperText="Number of Adult tickets"
                                             margin="normal"
@@ -212,7 +213,7 @@ class SellIndex extends Component{
                                             id="filled-select-currency"
                                             select
                                             value={this.state.students}
-                                            label="Student (P500 each)"
+                                            label="Student"
                                             onChange={(e)=>{this.setState({students: e.target.value})}}
                                             helperText="Number of Student tickets"
                                             margin="normal"
@@ -226,10 +227,11 @@ class SellIndex extends Component{
                                     </Button>
                                     <p>
                                         * For inquiries, contact <b>Mikey Rivera:</b> <u>mikeyriver@hackazouk.com</u> | <u>09178191791</u>
-                                        <br />
+                                        <br />{isMobile && <br />}
                                         * Students must present student ID upon ticket claim during the concert.
                                     </p>
                                 </div>
+                                {isMobile && <img style={{width: "100%"}} src="/images/Horizontal.png" />}
                             </Col>
                         </Row>
                     </div>

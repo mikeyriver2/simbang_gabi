@@ -123,3 +123,24 @@ $s3:"";
     100% {transform: translateY(200vh); }
 }
 /////////////////////////////////////////////////////////////////////////////
+
+@media(max-width: 768px){
+    .s-index{
+        margin-top: 10px;
+        height: auto;
+        &__form-container{
+            padding: 0px;
+            .row{
+                background: white;
+                margin-bottom: 20px !important;
+                padding-bottom: 20px;
+                .col-md-12{
+                    h1{
+                        font-size: 2rem;
+                        padding: 30px 0px 5px 0px;
+                    }
+                }
+            }
+        }
+    }
+}
