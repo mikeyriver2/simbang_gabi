@@ -38,6 +38,15 @@ class SellIndex extends Component{
         }
     }
 
+    componentDidMount(){
+        setTimeout(() => {
+            if(document.getElementById('s-index__absolute')){
+                document.getElementById('s-index__absolute').classList.remove("hide-absolute");
+            }
+            document.getElementById('row-form').classList.remove("hide-form")            
+        }, 300);
+    }
+
     validateEmail = (email) => {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
@@ -138,13 +147,13 @@ class SellIndex extends Component{
                         }
                     </Modal.Body>
                 </Modal>
-                <div class="snow layer1" />
-                <div class="snow layer2" />
+                <div className="snow layer1" />
+                <div className="snow layer2" />
                 {/* <div class="snow layer3" /> */}
                 <div className="s-index">
-                    {!isMobile && <div style={{backgroundImage:'url("/images/MainPoster.jpg")'}} className="s-index__absolute" />}
+                    {!isMobile && <div id="s-index__absolute" style={{backgroundImage:'url("/images/MainPoster.jpg")'}} className="hide-absolute s-index__absolute" />}
                     <div className="s-index__form-container">
-                        <Row style={{margin: "0px"}}>
+                        <Row id="row-form" className="hide-form" style={{margin: "0px"}}>
                             {!isMobile && <Col md={4} />}
                             <Col md={isMobile ? 12 : 8}>
                                 <h1>RESERVATION FORM</h1>
@@ -189,7 +198,7 @@ class SellIndex extends Component{
                                             value = {this.state.patrons}
                                             label="Patron"
                                             onChange={(e)=>{this.setState({patrons: e.target.value})}}
-                                            helperText="Number of Patron tickets"
+                                            helperText="Number of Patron tickets (P1000)"
                                             margin="normal"
                                             variant="filled"
                                         >
@@ -202,7 +211,7 @@ class SellIndex extends Component{
                                             value={this.state.adults}
                                             label="Adult"
                                             onChange={(e)=>{this.setState({adults: e.target.value})}}
-                                            helperText="Number of Adult tickets"
+                                            helperText="Number of Adult tickets (P700)"
                                             margin="normal"
                                             variant="filled"
                                         >
@@ -215,7 +224,7 @@ class SellIndex extends Component{
                                             value={this.state.students}
                                             label="Student"
                                             onChange={(e)=>{this.setState({students: e.target.value})}}
-                                            helperText="Number of Student tickets"
+                                            helperText="Number of Student tickets (P500)"
                                             margin="normal"
                                             variant="filled"
                                         >
