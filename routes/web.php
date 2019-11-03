@@ -11,6 +11,8 @@
 |
 */
 
+Route::post('/create','ReservationsController@create');
+
 Route::get('/', function () {
     return view('app');
 });

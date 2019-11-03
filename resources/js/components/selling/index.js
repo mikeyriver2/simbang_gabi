@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Col, Row, Modal } from 'react-bootstrap';
 import { Button, TextField, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const styles = {
     button: {
@@ -69,24 +70,35 @@ class SellIndex extends Component{
     }
 
     handleConfirm = () => {
-        this.setState(prevState=>({
-            patrons: 0,
-            adults: 0,
-            students: 0,
-            fullName: "",
-            email: "",
-            phone: "",
-            showThankYou: true,
-            temp: prevState.fullName
-        }),()=>{
-            setTimeout(()=>{
-                this.setState({
-                    showThankYou: false,
-                    showModal: false,
-                    temp: ""
-                })
-            },10000)
-        })
+        const {fullName, patrons, adults, students, phone, email} = this.state;
+        let values = {
+            phone_number: phone,
+            full_name: fullName,
+            patrons,
+            adults,
+            students,
+            email
+        }
+        axios.post('/create',values).then(res=>{
+            this.setState(prevState=>({
+                patrons: 0,
+                adults: 0,
+                students: 0,
+                fullName: "",
+                email: "",
+                phone: "",
+                showThankYou: true,
+                temp: prevState.fullName
+            }),()=>{
+                setTimeout(()=>{
+                    this.setState({
+                        showThankYou: false,
+                        showModal: false,
+                        temp: ""
+                    })
+                },10000)
+            })
+        });
     }
 
     render(){
