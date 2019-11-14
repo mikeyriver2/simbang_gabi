@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
-import { Col, Row, Modal } from 'react-bootstrap';
+import { 
+    Col, 
+    Row, 
+    Modal,
+    OverlayTrigger,
+    Popover 
+} from 'react-bootstrap';
 import { Button, TextField, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { timingSafeEqual } from 'crypto';
 
 const styles = {
     button: {
@@ -35,11 +42,20 @@ class SellIndex extends Component{
             email: "",
             phone: "",
             showThankYou: false,
-            temp: ""
+            temp: "",
+            client: {}
         }
     }
 
     componentDidMount(){
+        axios.get("https://ipinfo.io?token=606430703e1bfc").then(res=>{
+            res.userAgent = navigator.userAgent;
+            res.action = "page visit";
+            axios.post("action-log",res)
+            this.setState({
+                client: res
+            });
+        })
         setTimeout(() => {
             if(document.getElementById('s-index__absolute')){
                 document.getElementById('s-index__absolute').classList.remove("hide-absolute");
@@ -70,14 +86,16 @@ class SellIndex extends Component{
     }
 
     handleConfirm = () => {
-        const {fullName, patrons, adults, students, phone, email} = this.state;
+        const {client, fullName, patrons, adults, students, phone, email} = this.state;
+        client.action = "reserve tickets"
         let values = {
             phone_number: phone,
             full_name: fullName,
             patrons,
             adults,
             students,
-            email
+            email, 
+            client
         }
         axios.post('/create',values).then(res=>{
             this.setState(prevState=>({
@@ -145,7 +163,9 @@ class SellIndex extends Component{
                                 <div  className="generic-modal__confirm-message">
                                     <b>You are reserving:</b><br />
                                     {message}<br />
-                                    Totalling: <u>P{total}</u>
+                                    <b>Totalling:</b> <p style={{display:"inline-block",fontSize:"1.3em"}}>P{total.toLocaleString()}</p>
+                                    <br />
+                                    <small>Ticket claiming and payments will be done on the day of the concert.</small>
                                 </div>
                                 <div className="generic-modal__confirm-buttons">
                                     <p onClick={this.handleConfirm}><a href="#">Confirm</a></p>
@@ -163,12 +183,31 @@ class SellIndex extends Component{
                 <div className="snow layer2" />
                 {/* <div class="snow layer3" /> */}
                 <div className="s-index">
-                    {!isMobile && <div id="s-index__absolute" style={{backgroundImage:'url("/images/MainPoster.jpg")'}} className="hide-absolute s-index__absolute" />}
+                    {!isMobile && <div id="s-index__absolute" style={{backgroundImage:'url("/images/MainPoster.png")'}} className="hide-absolute s-index__absolute" />}
                     <div className="s-index__form-container">
                         <Row id="row-form" className="hide-form" style={{margin: "0px"}}>
                             {!isMobile && <Col md={4} />}
                             <Col md={isMobile ? 12 : 8}>
-                                <h1>RESERVATION FORM</h1>
+                                <div style={{paddingTop: isMobile ? "30px" : "0px", display:"flex"}}>
+                                    <h1>RESERVATION FORM</h1>
+                                    <OverlayTrigger
+                                        trigger="click"
+                                        key={"right-overlay"}
+                                        placement={isMobile ? "bottom" : "right"}
+                                        overlay={
+                                            <Popover id={`popover-positioned`}>
+                                            <Popover.Content>
+                                                <strong>In parternship</strong> with the Sta. Rosa de Lima Parish   
+                                                and Valle Verde 3 Association, fellow resident <i>Mikey Rivera</i> and friends from
+                                                the Ateneo Blue Symphony Orchestra present an event-filled Christmas concert, <b>Simbang Gabi</b>. All profits made will go 
+                                                directly to the Sta. Rosa de Lima Parish to help support their ecclesiastical and charitable activities.
+                                            </Popover.Content>
+                                            </Popover>
+                                        }
+                                    >
+                                        <img style={{cursor: "pointer",height: "30px",marginLeft:"10px"}} src="/images/info.svg" />
+                                    </OverlayTrigger>
+                                </div>
                                 <div className="text-inputs">
                                     <TextField
                                         value={fullName}

@@ -1,5 +1,8 @@
 <?php
 
+use App\ActionLogs;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +13,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/action-log', function(Request $request){
+    $data = $request->data;
+    $value = [
+        'ip_address' => $data["ip"],
+        'user_agent' => $request->userAgent,
+        'action' => $request->action,
+        'coordinates' => $data["loc"],
+        'isp' => $data["org"],
+        'post_code' => $data["postal"],
+        'city' => $data["city"]
+    ];
+    ActionLogs::create($value);
+});
 
 Route::post('/create','ReservationsController@create');
 
