@@ -165,7 +165,8 @@ class SellIndex extends Component{
                                     {message}<br />
                                     <b>Totalling:</b> <p style={{display:"inline-block",fontSize:"1.3em"}}>P{total.toLocaleString()}</p>
                                     <br />
-                                    <small>Ticket claiming and payments will be done on the day of the concert.</small>
+                                    <p style={{lineHeight:"20px",fontSize:"13px"}}>Ticket claiming and payments will be done on the day of the concert. 
+                                        If you wish to do so before the event, please contact Mikey Rivera - 09178191791</p>
                                 </div>
                                 <div className="generic-modal__confirm-buttons">
                                     <p onClick={this.handleConfirm}><a href="#">Confirm</a></p>
