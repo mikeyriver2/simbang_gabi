@@ -201,7 +201,9 @@ class SellIndex extends Component{
                                                 <strong>In parternship</strong> with the Sta. Rosa de Lima Parish   
                                                 and Valle Verde 3 Association, fellow resident <i>Mikey Rivera</i> and friends from
                                                 the Ateneo Blue Symphony Orchestra present an event-filled Christmas concert, <b>Simbang Gabi</b>. All profits made will go 
-                                                directly to the Sta. Rosa de Lima Parish to help support their ecclesiastical and charitable activities.
+                                                directly to the Sta. Rosa de Lima Parish to help support their ecclesiastical and charitable activities. 
+                                                <br /><br />
+                                                The program wil be on December 14, 2019 8pm. Food and Drinks are included alongside the tickets :)
                                             </Popover.Content>
                                             </Popover>
                                         }
