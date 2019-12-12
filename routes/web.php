@@ -1,6 +1,8 @@
 <?php
 
 use App\ActionLogs;
+use App\Reservation;
+
 use Illuminate\Http\Request;
 
 /*
@@ -29,6 +31,18 @@ Route::post('/action-log', function(Request $request){
 });
 
 Route::post('/create','ReservationsController@create');
+
+Route::get('/thisisarandomass',function(){
+    return Reservation::all();
+});
+
+
+Route::post('/confirmpayment',function(Request $request){
+    $reservation = Reservation::find($request->id);
+    $reservation->paid = 1;
+    $reservation->save();
+    return $reservation;
+});
 
 Route::get('/', function () {
     return view('app');

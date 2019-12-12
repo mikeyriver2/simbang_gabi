@@ -12,6 +12,8 @@ class Reservation extends Model
         'phone_number',
         'patrons',
         'adults',
-        'students'
+        'students',
+        'special',
+        'paid'
     ];
 }
